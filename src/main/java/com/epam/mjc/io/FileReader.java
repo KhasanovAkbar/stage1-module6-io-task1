@@ -2,12 +2,13 @@ package com.epam.mjc.io;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
 public class FileReader {
 
-    public Profile getDataFromFile(File file) {
+    public Profile getDataFromFile(File file) throws IOException{
         StringBuilder stringBuilder = new StringBuilder();
 
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
@@ -16,7 +17,7 @@ public class FileReader {
                 stringBuilder.append((char) ch);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e.getMessage());
         }
 
         Profile profile = new Profile();
