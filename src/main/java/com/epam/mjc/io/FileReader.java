@@ -2,7 +2,6 @@ package com.epam.mjc.io;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -16,9 +15,6 @@ public class FileReader {
             while ((ch = fileInputStream.read()) != -1) {
                 stringBuilder.append((char) ch);
             }
-
-        } catch (FileNotFoundException exception) {
-            exception.printStackTrace();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -43,6 +39,8 @@ public class FileReader {
                 case "Phone:":
                     profile.setPhone(Long.parseLong(split1[1]));
                     break;
+                default:
+                    throw new IllegalArgumentException();
             }
         }
         return profile;
